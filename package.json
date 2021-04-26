@@ -6,14 +6,17 @@
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=express-pixel_mart:* npm run devstart",
+    "sass-watch": "sass --watch ./scss/main.scss:./public/stylesheets/style.css"
   },
   "dependencies": {
+    "async": "^3.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "mongoose": "^5.12.5",
     "morgan": "~1.9.1",
+    "node-sass": "^5.0.0",
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
