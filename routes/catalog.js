@@ -8,7 +8,7 @@ const itemController = require('../controllers/itemController');
 /// CATEGORY ROUTES
 
 // Catalog home page (displays all the categories)
-router.get('/', categoryController.index);
+router.get('/', categoryController.category_list);
 
 // GET request to create a category
 router.get('/category/create', categoryController.category_create_get);
@@ -29,7 +29,7 @@ router.get('/category/:id/delete', categoryController.category_delete_get);
 router.post('/category/:id/delete', categoryController.category_delete_post);
 
 // GET request to see a category's details
-router.post('/category/:id', categoryController.category_details);
+router.get('/category/:id', categoryController.category_detail);
 
 /// ITEM ROUTES
 
@@ -56,3 +56,5 @@ router.get('/items', itemController.item_list);
 
 // GET request to see an item's details
 router.get('/item/:id', itemController.item_detail);
+
+module.exports = router;

@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  h1= title
+
+  div
+    #{category.name}
+    #{category.description}
+
+  - items.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
+  ul
+    for item in items
+      li #{item.name}
+
+  p Deleting this category will also delete all associated items. Do you really want to delete this Category ?
+
+  form(method='POST' action='')
+    button(type='submit') Delete

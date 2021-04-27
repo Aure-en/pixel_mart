@@ -1,0 +1,22 @@
+nav
+  ul
+    li
+      a(href='/catalog')
+    li
+      ul
+        - categories.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
+        each category in categories
+          li
+            a(href=`/catalog/category/${category._id}`) #{category.name}
+
+        li
+          a(href='/catalog/items') All Items
+
+    li
+      ul
+        li
+          a(href='/catalog/category/create') Create new category
+        li
+          a(href='/catalog/item/create') Create new item
+  
+  a(href='/catalog')

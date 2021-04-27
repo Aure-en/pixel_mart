@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1= title
+  p= description
+
+  ul
+    - items.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
+
+    each item in items
+      li #{item.name}
+
+  a(href=url + '/update') Update
+  a(href=url + '/delete') Delete

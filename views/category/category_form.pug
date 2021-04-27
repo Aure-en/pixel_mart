@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    label(for='name') Name:
+    input#name(type='text', name='name', value=(category===undefined ? '' : category.name))
+    -
+      let nameError;
+      if (errors) {
+        nameError = errors.find(error => error.param === 'name');
+      }
+    if nameError
+      div #{nameError.msg}
+
+    label(for='description') Description:
+    input#name(type='text', name='description', value=(category===undefined ? '' : category.description))
+    -
+      let descriptionError;
+      if (errors) {
+        descriptionError = errors.find(error => error.param === 'description')
+      }
+    if descriptionError
+      div #{descriptionError.msg}
+
+    button(type='submit') Create

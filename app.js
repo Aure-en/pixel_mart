@@ -4,14 +4,17 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+require('dotenv').config({ path: `${__dirname}/.env.local` });
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const catalogRouter = require('./routes/catalog');
+
+const Category = require('./models/category');
 
 const app = express();
 
 // Set up mongoose
-
 const mongoDB = `mongodb+srv://Aurelie:${process.env.MONGODB_PASSWORD}@cluster0.t6dqf.mongodb.net/pixel_mart?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -27,8 +30,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  Category.find({}, 'name').exec((err, result) => {
+    if (err) return next(err);
+    res.locals.categories = result;
+    next();
+  });
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/catalog', catalogRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
