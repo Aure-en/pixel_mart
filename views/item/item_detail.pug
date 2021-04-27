@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  h1= title
+  p= description
+  p Price: #{price}
+  p Category: #{category.name}
+  p Quantity: #{quantity}
+
+  a(href=url + '/update') Update
+  a(href=url + '/delete') Delete

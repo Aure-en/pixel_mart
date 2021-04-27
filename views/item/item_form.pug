@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(method='POST', action= '')
+
+    -
+      let nameError, descriptionError, priceError, quantityError;
+      if (errors) {
+        nameError = errors.find((error) => error.param === 'name');
+        descriptionError = errors.find((error) => error.param === 'description');
+        priceError = errors.find((error) => error.param === 'price');
+        quantityError = errors.find((error) => error.param === 'quantity');
+      }
+
+    label(for='name') Name:
+    input#name(type='text', name='name', value=(item === undefined ? '' : item.name))
+    if nameError
+      div #{nameError.msg}
+
+    label(for='description') Description:
+    input#description(type='text', name='description', value=(item === undefined ? '' : item.description))
+    if descriptionError
+      div #{descriptionError.msg}
+
+    label(for='category') Category:
+    select#category(name='category')
+      for category in category_list
+        if item
+          option(
+            value=category._id,
+            selected=(category._id.toString() === item.category._id.toString())
+          ) #{category.name}
+        else
+          option(value=category._id) #{category.name}
+
+    label(for='price') Price:
+    input#price(type='number', name='price', value=(item === undefined ? '' : item.price))
+    if priceError
+      div #{priceError.msg}
+
+    label(for='quantity') Quantity:
+    input#quantity(type='number', name='quantity', value=(item === undefined ? '' : item.quantity))
+    if quantityError
+      div #{quantityError.msg}
+
+    button(type='submit') #{title}

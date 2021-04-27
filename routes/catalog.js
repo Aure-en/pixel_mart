@@ -49,7 +49,7 @@ router.post('/item/:id/update', itemController.item_update_post);
 router.get('/item/:id/delete', itemController.item_delete_get);
 
 // POST request to delete an item
-router.get('/item/:id/delete', itemController.item_delete_post);
+router.post('/item/:id/delete', itemController.item_delete_post);
 
 // GET request to see all items
 router.get('/items', itemController.item_list);

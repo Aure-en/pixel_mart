@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  h1= title
+
+  p Are you sure you want to delete the item #{name} ?
+
+  form(method='POST' action='')
+    button(type='submit') Delete

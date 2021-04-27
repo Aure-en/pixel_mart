@@ -8,7 +8,8 @@ block content
     - items.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
 
     each item in items
-      li #{item.name}
+      li 
+        a(href=item.url) #{item.name}
 
   a(href=url + '/update') Update
   a(href=url + '/delete') Delete
