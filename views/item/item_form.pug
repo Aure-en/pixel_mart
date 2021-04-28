@@ -3,7 +3,7 @@ extends ../layout
 block content
   h1= title
 
-  form(method='POST', action= '')
+  form(method='POST', action= '', enctype='multipart/form-data')
 
     -
       let nameError, descriptionError, priceError, quantityError;
@@ -27,10 +27,11 @@ block content
     label(for='category') Category:
     select#category(name='category')
       for category in category_list
+        div #{category._id.toString()}
         if item
           option(
             value=category._id,
-            selected=(category._id.toString() === item.category._id.toString())
+            selected=(category._id.toString() == item.category)
           ) #{category.name}
         else
           option(value=category._id) #{category.name}
@@ -44,5 +45,8 @@ block content
     input#quantity(type='number', name='quantity', value=(item === undefined ? '' : item.quantity))
     if quantityError
       div #{quantityError.msg}
+
+    label(for='image') Image:
+    input#image(type='file', name='image', value=(item === undefined ? '' : item.image))
 
     button(type='submit') #{title}

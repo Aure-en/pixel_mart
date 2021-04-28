@@ -5,6 +5,8 @@ const router = express.Router();
 const categoryController = require('../controllers/categoryController');
 const itemController = require('../controllers/itemController');
 
+const upload = require('../middleware/upload');
+
 /// CATEGORY ROUTES
 
 // Catalog home page (displays all the categories)
@@ -37,13 +39,13 @@ router.get('/category/:id', categoryController.category_detail);
 router.get('/item/create', itemController.item_create_get);
 
 // POST request to create an item
-router.post('/item/create', itemController.item_create_post);
+router.post('/item/create', upload, itemController.item_create_post);
 
 // GET request to update an item
 router.get('/item/:id/update', itemController.item_update_get);
 
 // POST request to update an item
-router.post('/item/:id/update', itemController.item_update_post);
+router.post('/item/:id/update', upload, itemController.item_update_post);
 
 // GET request to delete an item
 router.get('/item/:id/delete', itemController.item_delete_get);

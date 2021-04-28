@@ -1,4 +1,6 @@
 const async = require('async');
+const fs = require('fs');
+const path = require('path');
 const { body, validationResult } = require('express-validator');
 const Item = require('../models/item');
 const Category = require('../models/category');
@@ -31,6 +33,7 @@ exports.item_detail = function (req, res, next) {
       category: item.category,
       quantity: item.quantity,
       url: item.url,
+      image: item.image,
       categories: res.locals.categories,
     });
   });
@@ -87,13 +90,28 @@ exports.item_create_post = [
     }
 
     // No errors, create the item and save it.
-    const item = new Item({
+    const data = {
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
       quantity: req.body.quantity,
       category: req.body.category,
-    });
+    };
+
+    // Add image field if there is an image
+    if (req.file) {
+      data.image = {
+        name: req.file.filename,
+        data: fs.readFileSync(path.join(__dirname, `../images/${req.file.filename}`)),
+        contentType: req.file.mimetype,
+      };
+      // Delete the image from the disk after using it
+      fs.unlink(path.join(__dirname, `../images/${req.file.filename}`), (err) => {
+        if (err) throw err;
+      });
+    }
+
+    const item = new Item(data);
 
     item.save((err) => {
       if (err) return next(err);
@@ -106,7 +124,7 @@ exports.item_create_post = [
 exports.item_update_get = function (req, res, next) {
   async.parallel({
     item(callback) {
-      Item.findById(req.params.id).populate('category').exec(callback);
+      Item.findById(req.params.id).exec(callback);
     },
     categories(callback) {
       Category.find().exec(callback);
@@ -119,7 +137,7 @@ exports.item_update_get = function (req, res, next) {
       return next(err);
     }
     res.render('item/item_form', {
-      title: 'Create Item',
+      title: 'Update Item',
       category_list: results.categories,
       item: results.item,
       categories: res.locals.categories,
@@ -150,6 +168,30 @@ exports.item_update_post = [
   (req, res, next) => {
     const errors = validationResult(req);
 
+    const data = {
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      category: req.body.category,
+      _id: req.params.id,
+    };
+
+    // Add image field if there is an image
+    if (req.file) {
+      data.image = {
+        name: req.file.filename,
+        data: fs.readFileSync(path.join(__dirname, `../images/${req.file.filename}`)),
+        contentType: req.file.mimetype,
+      };
+      // Delete the image from the disk after using it
+      fs.unlink(path.join(__dirname, `../images/${req.file.filename}`), (err) => {
+        if (err) throw err;
+      });
+    }
+
+    const item = new Item(data);
+
     if (!errors.isEmpty()) {
       // There are errors. Render the form with values / errors.
       Category.find().exec((err, result) => {
@@ -157,23 +199,13 @@ exports.item_update_post = [
         res.render('item/item_form', {
           title: 'Update Item',
           category_list: result,
-          item: req.body,
+          item,
           errors: errors.array(),
           categories: res.locals.categories,
         });
       });
       return;
     }
-
-    // No errors, update the item.
-    const item = new Item({
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      quantity: req.body.quantity,
-      category: req.body.category,
-      _id: req.params.id,
-    });
 
     Item.findByIdAndUpdate(req.params.id, item, {}, (err) => {
       if (err) return next(err);
