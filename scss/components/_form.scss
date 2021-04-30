@@ -1,0 +1,107 @@
+.form {
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  @media all and (min-width: 768px) {
+    width: 40rem;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  & > button[type='submit'] {
+    margin-top: auto;
+  }
+}
+
+.form__field {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.form__field--column {
+  flex-direction: column;
+}
+
+label {
+  margin-right: 1rem;
+}
+
+input[type='text'],
+input[type='number'] {
+  background: none;
+  border: none;
+  border-bottom: 1px solid $text-primary;
+  font-family: $fonts;
+  font-size: 1rem;
+  color: $text-secondary;
+  flex: 1;
+  max-width: 12.5rem;
+
+  @media all and (min-width: 400px) {
+    max-width: initial;
+  }
+
+  &:focus {
+    outline: 1px solid transparent;
+    border-bottom: 1px solid $text-secondary;
+  }
+}
+
+textarea {
+  background: none;
+  border: 1px solid $text-primary;
+  font-family: $fonts;
+  font-size: 1rem;
+  color: $text-secondary;
+  flex: 1;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  max-width: calc(320px - 3rem);
+
+  @media all and (min-width: 400px) {
+    max-width: initial;
+  }
+
+  &:focus {
+    outline: 1px solid transparent;
+    border: 1px solid $text-secondary;
+  }
+}
+
+select {
+  background: $background-select;
+  font-family: $fonts;
+  font-size: 1rem;
+  color: $text-secondary;
+  flex: 1;
+  padding: 0 0.5rem;
+
+  &:focus {
+    outline: 1px solid transparent;
+  }
+}
+
+.input_icon {
+  visibility: hidden;
+  position: absolute;
+}
+
+.label_icon {
+  cursor: pointer;
+  border: 1px inset $border-item;
+  margin: 0 auto;
+  display: block;
+  line-height: 0;
+}
+
+.label_icon_empty {
+  cursor: pointer;
+  border: 1px inset $border-item;
+  margin: 0 auto;
+  display: block;
+  padding: 0 1rem;
+  line-height: inherit;
+}

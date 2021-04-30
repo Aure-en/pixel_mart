@@ -1,0 +1,18 @@
+.links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
+.link,
+.button {
+  &:before {
+    content: '►';
+    display: inline-block;
+    margin-right: 0.5rem;
+    color: $background;
+  }
+  &:hover:before {
+    color: $text-secondary;
+  }
+}

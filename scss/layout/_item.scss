@@ -1,0 +1,12 @@
+.item {
+  display: grid;
+  grid-template-rows: repeat(3, auto) 1fr auto;
+}
+
+.item__details {
+  margin: 1rem 0;
+}
+
+.item__image {
+  justify-self: center;
+}

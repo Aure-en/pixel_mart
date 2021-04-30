@@ -1,0 +1,33 @@
+.box {
+  background: $background;
+  border: 2px solid $border;
+  padding: 1rem 2rem;
+  width: 100vw;
+  max-width: 100%;
+
+  @media all and (min-width: 768px) {
+    width: 40rem;
+    padding: 2rem 4rem;
+    margin: 2rem;
+  }
+}
+
+.box--small {
+  display: flex;
+  flex-direction: column;
+  width: 100wv;
+  max-width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  @media all and (min-width: 768px) {
+    max-width: 20rem;
+    padding: 2rem;
+    margin: 2rem;
+  }
+}
+
+.box__header {
+  text-align: center;
+  margin-bottom: 1rem;
+}

@@ -5,8 +5,13 @@ html
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="preconnect" href="https://fonts.gstatic.com")
+    link(href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet")
+    script(src="/javascripts/script.js" async)
   body
-    block nav
-      include ./nav.pug
+    div.wrapper
+      div.container
+        block nav
+          include ./nav.pug
 
-    block content
+        block content

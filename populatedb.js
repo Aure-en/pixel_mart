@@ -58,7 +58,7 @@ function categoryCreate(name, description, cb) {
 }
 
 function createCategories(cb) {
-  async.parallel([
+  async.series([
     function (callback) {
       categoryCreate('Bakery', 'Freshly baked goods for your whole family to enjoy! Feel free to browse through our breads, cookies, cakes, pastries and delicious pies.', callback);
     },
@@ -80,10 +80,6 @@ function createCategories(cb) {
     },
 
     function (callback) {
-      categoryCreate('Other', 'If you could not find your happiness in our other aisles, come visit our last department to find random goodies to spice up your shopping trip!', callback);
-    },
-
-    function (callback) {
       categoryCreate('Personal Care', 'Keep your breath fresh and skin clear with our personal care products. Buy the whole set to receive 10 charisma points.', callback);
     },
 
@@ -97,6 +93,10 @@ function createCategories(cb) {
 
     function (callback) {
       categoryCreate('Snacks', 'Who could resist eating our wonderful pack of chips during their afternoon break? With only 90% of air, they have the best value of all potato chips bags in the market. If you are in the mood for sweet snacks, we also offer ice cream or chocolate.', callback);
+    },
+
+    function (callback) {
+      categoryCreate('Other', 'If you could not find your happiness in our other aisles, come visit our last department to find random goodies to spice up your shopping trip!', callback);
     },
   ], cb);
 }
@@ -292,7 +292,7 @@ function createItems(cb) {
     },
 
     function(callback) {
-      itemCreate('Erase', 'Will erase all your mistakes if you scrub hard enough.', categories[9], 800, 10, callback);
+      itemCreate('Eraser', 'Will erase all your mistakes if you scrub hard enough.', categories[9], 800, 10, callback);
     },
 
     function(callback) {

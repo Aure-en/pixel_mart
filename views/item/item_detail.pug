@@ -1,14 +1,20 @@
 extends ../layout
 
 block content
-  h1= title
-  p= description
-  p Price: #{price}
-  p Category: #{category.name}
-  p Quantity: #{quantity}
+  main.box.item
+    div.box__header
+      h2= title
+    
+    p= description
 
-  if image
-    img(src=`data:${image.contentType};base64,${image.data.toString('base64')}`)
+    div.item__details
+      p Price: #{price}
+      p Category: #{category.name}
+      p Quantity: #{quantity}
 
-  a(href=url + '/update') Update
-  a(href=url + '/delete') Delete
+    if image.data
+      img.item__image(src=`data:${image.contentType};base64,${image.data.toString('base64')}`)
+
+    div.links
+      a.link(href=url + '/update') Update
+      a.link(href=url + '/delete') Delete

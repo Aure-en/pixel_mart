@@ -26,6 +26,9 @@ exports.item_detail = function (req, res, next) {
       err.status = 404;
       return next(err);
     }
+
+    console.log(item);
+
     res.render('item/item_detail', {
       title: item.name,
       description: item.description,

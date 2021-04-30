@@ -1,9 +1,10 @@
 extends ../layout
 
 block content
-  h1= title
+  main.box.item
+    h2= title
 
-  p Are you sure you want to delete the item #{name} ?
+    p Are you sure you want to delete the item #{name} ?
 
-  form(method='POST' action='')
-    button(type='submit') Delete
+    form(method='POST' action='')
+      button.button(type='submit') Delete

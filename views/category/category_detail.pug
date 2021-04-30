@@ -1,15 +1,25 @@
 extends ../layout
 
 block content
-  h1= title
-  p= description
+  main.box.category
+    div.box__header
+      h2= title
+      p= description
 
-  ul
-    - items.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
+    ul.item_list
+      - items.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
 
-    each item in items
-      li 
-        a(href=item.url) #{item.name}
+      each item in items
+        li.item_icon
+          if item.image.data
+            a(href=item.url)
+              img.icon(src=`data:${item.image.contentType};base64,${item.image.data.toString('base64')}`)
+          else
+            a(href=item.url)
+              div.placeholder
 
-  a(href=url + '/update') Update
-  a(href=url + '/delete') Delete
+          span.item__tooltip #{item.name}
+
+    div.links
+      a.link(href=url + '/update') Update
+      a.link(href=url + '/delete') Delete

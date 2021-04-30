@@ -1,52 +1,63 @@
 extends ../layout
 
 block content
-  h1= title
+  main.box.form
+    h1= title
 
-  form(method='POST', action= '', enctype='multipart/form-data')
+    form(method='POST', action= '', enctype='multipart/form-data')
 
-    -
-      let nameError, descriptionError, priceError, quantityError;
-      if (errors) {
-        nameError = errors.find((error) => error.param === 'name');
-        descriptionError = errors.find((error) => error.param === 'description');
-        priceError = errors.find((error) => error.param === 'price');
-        quantityError = errors.find((error) => error.param === 'quantity');
-      }
+      -
+        let nameError, descriptionError, priceError, quantityError;
+        if (errors) {
+          nameError = errors.find((error) => error.param === 'name');
+          descriptionError = errors.find((error) => error.param === 'description');
+          priceError = errors.find((error) => error.param === 'price');
+          quantityError = errors.find((error) => error.param === 'quantity');
+        }
 
-    label(for='name') Name:
-    input#name(type='text', name='name', value=(item === undefined ? '' : item.name))
-    if nameError
-      div #{nameError.msg}
+      div.form__field
+        label(for='name') Name:
+        input#name(type='text', name='name', value=(item === undefined ? '' : item.name))
+        if nameError
+          div #{nameError.msg}
 
-    label(for='description') Description:
-    input#description(type='text', name='description', value=(item === undefined ? '' : item.description))
-    if descriptionError
-      div #{descriptionError.msg}
+      div.form__field.form__field--column
+        label(for='description') Description:
+        textarea#description(name='description' rows=5) #{item === undefined ? '' : item.description}
+        if descriptionError
+          div #{descriptionError.msg}
 
-    label(for='category') Category:
-    select#category(name='category')
-      for category in category_list
-        div #{category._id.toString()}
-        if item
-          option(
-            value=category._id,
-            selected=(category._id.toString() == item.category)
-          ) #{category.name}
-        else
-          option(value=category._id) #{category.name}
+      div.form__field
+        label(for='category') Category:
+        select#category(name='category')
+          for category in category_list
+            div #{category._id.toString()}
+            if item
+              option(
+                value=category._id,
+                selected=(category._id.toString() == item.category)
+              ) #{category.name}
+            else
+              option(value=category._id) #{category.name}
 
-    label(for='price') Price:
-    input#price(type='number', name='price', value=(item === undefined ? '' : item.price))
-    if priceError
-      div #{priceError.msg}
+      div.form__field
+        label(for='price') Price:
+        input#price(type='number', name='price', value=(item === undefined ? '' : item.price))
+        if priceError
+          div #{priceError.msg}
 
-    label(for='quantity') Quantity:
-    input#quantity(type='number', name='quantity', value=(item === undefined ? '' : item.quantity))
-    if quantityError
-      div #{quantityError.msg}
+      div.form__field
+        label(for='quantity') Quantity:
+        input#quantity(type='number', name='quantity', value=(item === undefined ? '' : item.quantity))
+        if quantityError
+          div #{quantityError.msg}
 
-    label(for='image') Image:
-    input#image(type='file', name='image', value=(item === undefined ? '' : item.image))
+      div.form__field
+        label(for='image' class=(!item || item.image.data ? 'label_icon' : 'label_icon_empty'))
+          if !item || !item.image.data
+            | Add an image
+          if item && item.image.data
+            img.item__image(src=`data:${item.image.contentType};base64,${item.image.data.toString('base64')}`)
+          input.input_icon#image(type='file', name='image', value=(item === undefined ? '' : item.image))
 
-    button(type='submit') #{title}
+      button.button(type='submit') #{title}

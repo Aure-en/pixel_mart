@@ -1,0 +1,44 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.navBtn {
+  align-self: flex-end;
+}
+
+.navDropdown {
+  display: none;
+  @media all and (min-width: 768px) {
+    max-width: 20rem;
+  }
+}
+
+.navDropdown--active {
+  display: block;
+}
+
+.nav__category {
+  &:before {
+    content: '';
+    display: block;
+    position: relative;
+    left: -2rem;
+    width: calc(100% + 4rem);
+    height: 1px;
+    background: $text-primary;
+    opacity: 0.75;
+    margin: 1rem 0;
+  }
+}
+
+.nav__link {
+  display: block;
+  width: 100%;
+
+  &:hover:before {
+    content: '►';
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+}

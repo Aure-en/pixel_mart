@@ -4,6 +4,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const livereload = require('livereload');
+const connectLivereload = require('connect-livereload');
 require('dotenv').config({ path: `${__dirname}/.env.local` });
 
 const indexRouter = require('./routes/index');
@@ -12,7 +14,17 @@ const catalogRouter = require('./routes/catalog');
 
 const Category = require('./models/category');
 
+const server = livereload.createServer();
+server.watch(`${__dirname}/public`);
+
 const app = express();
+app.use(connectLivereload());
+
+server.server.once('connection', () => {
+  setTimeout(() => {
+    server.refresh('/');
+  }, 100);
+});
 
 // Set up mongoose
 const mongoDB = `mongodb+srv://Aurelie:${process.env.MONGODB_PASSWORD}@cluster0.t6dqf.mongodb.net/pixel_mart?retryWrites=true&w=majority`;

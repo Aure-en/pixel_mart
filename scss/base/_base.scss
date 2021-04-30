@@ -1,0 +1,57 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  background-image: url(../images/background.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: $fonts;
+  line-height: 2rem;
+  color: $text-primary;
+  overflow-x: hidden;
+
+  @media all and (min-width: 1400px) {
+    background-position: center 60%;
+  }
+}
+
+.container {
+  @media all and (min-width: 758px) {
+    display: flex;
+  }
+}
+
+a {
+  color: $text-primary;
+  text-decoration: none;
+
+  &:hover {
+    color: $text-secondary;
+  }
+}
+
+button {
+  background: none;
+  border: none;
+  font-family: $fonts;
+  line-height: 2rem;
+  color: $text-primary;
+  cursor: pointer;
+  font-size: 1rem;
+
+  &:hover {
+    color: $text-secondary;
+  }
+
+  &:focus {
+    outline: 1px solid transparent;
+  }
+}

@@ -1,9 +1,20 @@
 extends ../layout
 
 block content
-  - items.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
+  main.box.category
+    div.box__header
+      h2= title
+      p Don't know what you are looking for? Check out all the items our local Pixel Mart has to offer.
+    - items.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
 
-  ul
-    for item in items
-      li 
-        a(href=item.url) #{item.name}
+    ul.item_list
+      each item in items
+        li.item_icon
+          if item.image.data
+            a(href=item.url)
+              img.icon(src=`data:${item.image.contentType};base64,${item.image.data.toString('base64')}`)
+          else
+            a(href=item.url)
+              div.placeholder
+
+          span.item__tooltip #{item.name}
