@@ -3,7 +3,7 @@
   grid-template-rows: auto 1fr;
 
   @media all and (min-width: 768px) {
-    width: 40rem;
+    max-width: 40rem;
   }
 }
 

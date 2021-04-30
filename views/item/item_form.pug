@@ -53,11 +53,11 @@ block content
           div #{quantityError.msg}
 
       div.form__field
-        label(for='image' class=(!item || item.image.data ? 'label_icon' : 'label_icon_empty'))
+        label(for='image' class=(item && item.image.data ? 'label_icon' : 'label_icon_empty'))
           if !item || !item.image.data
             | Add an image
           if item && item.image.data
             img.item__image(src=`data:${item.image.contentType};base64,${item.image.data.toString('base64')}`)
-          input.input_icon#image(type='file', name='image', value=(item === undefined ? '' : item.image))
+          input.input_icon#image(type='file', name='image', value=(item === undefined ? '' : item.image) class=(!item || !item.image.data && '.input_icon--empty'))
 
       button.button(type='submit') #{title}

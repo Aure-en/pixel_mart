@@ -6,7 +6,7 @@
   max-width: 100%;
 
   @media all and (min-width: 768px) {
-    width: 40rem;
+    max-width: 40rem;
     padding: 2rem 4rem;
     margin: 2rem;
   }
@@ -15,7 +15,7 @@
 .box--small {
   display: flex;
   flex-direction: column;
-  width: 100wv;
+  width: 100vw;
   max-width: 100%;
   padding: 1rem;
   margin-bottom: 1rem;

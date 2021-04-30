@@ -75,7 +75,7 @@ body {
   }
 }
 
-@media all and (min-width: 758px) {
+@media all and (min-width: 768px) {
   .container {
     display: flex;
   }
@@ -105,6 +105,10 @@ button:focus {
   outline: 1px solid transparent;
 }
 
+.hidden {
+  display: none;
+}
+
 h1, h2 {
   font-size: 1.25rem;
   line-height: 2.5rem;
@@ -125,7 +129,7 @@ h1, h2 {
 }
 @media all and (min-width: 768px) {
   .navDropdown {
-    max-width: 20rem;
+    width: 12.5rem;
   }
 }
 
@@ -164,7 +168,7 @@ h1, h2 {
 }
 @media all and (min-width: 768px) {
   .box {
-    width: 40rem;
+    max-width: 40rem;
     padding: 2rem 4rem;
     margin: 2rem;
   }
@@ -173,7 +177,7 @@ h1, h2 {
 .box--small {
   display: flex;
   flex-direction: column;
-  width: 100wv;
+  width: 100vw;
   max-width: 100%;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -197,7 +201,7 @@ h1, h2 {
 }
 @media all and (min-width: 768px) {
   .form {
-    width: 40rem;
+    max-width: 40rem;
   }
 }
 

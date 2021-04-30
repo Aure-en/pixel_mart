@@ -24,7 +24,7 @@ body {
 }
 
 .container {
-  @media all and (min-width: 758px) {
+  @media all and (min-width: 768px) {
     display: flex;
   }
 }
@@ -54,4 +54,8 @@ button {
   &:focus {
     outline: 1px solid transparent;
   }
+}
+
+.hidden {
+  display: none;
 }
